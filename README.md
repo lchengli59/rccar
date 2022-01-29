@@ -1,3 +1,7 @@
 # rccar
 
-The rccar is a game program using pygame to play remote control car
+This is a follow up on a tutorial as follows:
+
+The full tutorial is available here: http://rmgi.blog./pygame-2d-car-tutorial.html
+
+The code is available here: https://github.com/rasmaxim/pygame-car-tutorial
