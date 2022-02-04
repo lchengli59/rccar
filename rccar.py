@@ -7,6 +7,7 @@ import os
 import pygame
 from math import sin, radians, degrees, copysign, cos
 from pygame.math import Vector2
+import time
 
 
 class Car:
@@ -74,6 +75,10 @@ class Car:
             return 1
         else:
             return 0
+
+    def reset(self):
+        self.position = Vector2(10, 10)
+        self.velocity = Vector2(0.0, 0.0)
             
     def update(self, dt):
         self.velocity += (self.acceleration * dt, 0)
@@ -93,9 +98,9 @@ class Game:
     def __init__(self):
         pygame.init()
         pygame.display.set_caption("My Remote Control Car")
-        width = 1280
-        height = 720
-        self.screen = pygame.display.set_mode((width, height))
+        self.width = 1280
+        self.height = 720
+        self.screen = pygame.display.set_mode((self.width, self.height))
         self.clock = pygame.time.Clock()
         self.ticks = 60
         self.exit = False
@@ -109,6 +114,10 @@ class Game:
 
         car.border[0] = 1280 / 32
         car.border[1] = 720 / 32
+
+        start_time = time.time()
+        txtfont = pygame.font.SysFont("comicsans", 44)
+    
 
         while not self.exit:
             dt = self.clock.get_time() / 1000
@@ -137,6 +146,9 @@ class Game:
             else:
                 car.steerwheel("NONE", dt)
 
+            if pressed[pygame.K_ESCAPE]:
+                car.reset()
+
             # Logic
             car.update(dt)
             
@@ -145,15 +157,23 @@ class Game:
             rotated = pygame.transform.rotate(car_image, car.angle)
             rect = rotated.get_rect()
             self.screen.blit(rotated, car.position * ppu - (rect.width / 2, rect.height / 2))
+            pos_text = txtfont.render(
+                f"Position: {round(car.position[0])},{round(car.position[1])}", 1, (255, 255, 255))
+            self.screen.blit(pos_text, (10, self.height - pos_text.get_height() - 40))
+            vel_text = txtfont.render(
+                f"Vel: {round(car.velocity.x)}m/s", 1, (255, 255, 255))
+            self.screen.blit(vel_text, (10, self.height - vel_text.get_height() - 10))
             pygame.display.flip()
-            
+
+            '''            
             for i in range(10):
                 if (car.xborder()==1):
                     car.backward(dt)
                     car.update(dt)
                 else:
                     break
-
+            '''
+            
             self.clock.tick(self.ticks)
         pygame.quit()
 
