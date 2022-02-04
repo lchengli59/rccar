@@ -3,6 +3,8 @@
 #
 # Added code to prevent the car from going out of screen
 #
+# Added escape key if car go out of screen
+#
 import os
 import pygame
 from math import sin, radians, degrees, copysign, cos
