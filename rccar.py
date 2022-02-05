@@ -1,8 +1,8 @@
 # The full tutorial is available here: http://rmgi.blog./pygame-2d-car-tutorial.html
 # The code is available here: https://github.com/rasmaxim/pygame-car-tutorial
 #
+# This is inspired from the above tutorial and code
 # Added code to prevent the car from going out of screen
-#
 # Added escape key if car go out of screen
 #
 import os
@@ -167,14 +167,12 @@ class Game:
             self.screen.blit(vel_text, (10, self.height - vel_text.get_height() - 10))
             pygame.display.flip()
 
-            '''            
             for i in range(10):
                 if (car.xborder()==1):
                     car.backward(dt)
                     car.update(dt)
                 else:
                     break
-            '''
             
             self.clock.tick(self.ticks)
         pygame.quit()
