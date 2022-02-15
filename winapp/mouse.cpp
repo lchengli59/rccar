@@ -81,7 +81,6 @@ Mouse::Mouse() : color(QRandomGenerator::global()->bounded(256),
 /*-------------------------------------------------------------------------*/
 {
     pic.load("car.png");
-    pic.setMask(pic.createMaskFromColor(Qt::white,Qt::MaskInColor));
     rotated = pic;
 }
 
